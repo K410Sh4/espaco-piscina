@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    font-family: sans-serif;
+    color: rgb(255, 255, 255);
+    list-style: none;
+}
+@keyframes navLinkFade{
+    from{
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to{
+      opacity: 1;
+      transform: translateX(0px);
+    }
+}
+@media(max-width: 999px){
+       .header .options-header .nav-list{
+        position: absolute;
+        
+        right: 0;
+        width: 100px;
+        height: 30vw;
+        flex-direction: column;
+        justify-content: space-around;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
+        background: linear-gradient(to top , rgb(45, 142, 253),cyan,white);
+       }
+}
+
+body{
+    margin: 0px;
+    overflow-x: hidden;
+}
+header{
+   margin: auto;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to right, rgb(0, 155, 255), rgb(255, 255, 255));
+}
+.header .logo{
+    display: flex;
+    margin-left:1px;
+}
+.header .logo .logo-image img{
+    width: 50px;
+}
+.header .logo .logo-name{
+font-size: 30px;
+margin-left: 10px;
+}
+.header .options-header{
+      margin-right: 10px;
+      display: flex;
+}
+.header .options-header .mobile-menu{
+    display: none;
+    cursor: pointer;
+    display: block;
+}
+.header .options-header .mobile-menu div{
+    width: 32px;
+    height: 2px;
+    background: black;
+    margin: 8px;
+    transition: 0.3s;
+}
+.header .options-header .nav-list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 55, 255, 0.5);
+    opacity: 1;
+    margin: 10px 0px;
+    border-radius: 10px;
+}
+.header .options-header .nav-list:not(.active){
+    transform: translateX(0); 
+    opacity: 0;
+    
+}
+.header .options-header .nav-list.active {
+    transform: translateX(0); 
+    
+}
+.header .options-header .mobile-menu.active .Line1{
+     transform: rotate(-45deg) translate(-8px,8px);
+}
+.header .options-header .mobile-menu.active .Line2{
+    opacity: 0;
+}
+.header .options-header .mobile-menu.active .Line3{
+    transform: rotate(45deg) translate(-8px,-8px);
+}
+.header .options-header .nav-list li{
+    margin-left: 0;
+    opacity: 0;
+}
+.header .options-header .nav-list span{
+    letter-spacing: 3px;
+    margin: 10px;
+}
+.header .options-header .nav-list span:hover{
+    cursor: pointer; 
+    opacity: 0.7;
+}
+.header .options-header .option{
+    background: rgba(0, 255, 255, 0.47) ;
+    border-radius: 5px;
+    padding: 5px;
+}
+.header .options-header .option span{
+    color: black;
+    font-style: oblique;
+    font-weight: 100;
+}
+body{
+    background: linear-gradient(to top , rgb(45, 142, 253),cyan,white);
+    background-repeat: no-repeat;
+    height: 100vh;
+}
