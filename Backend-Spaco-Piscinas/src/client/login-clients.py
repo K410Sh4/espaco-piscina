@@ -106,3 +106,16 @@ async def get_conn ():
 async def app_startup(app: FastAPI):
 
     #O codigo que ira rodar dentro do FastAPI após o startup
+    print("Inicializando Banco...")
+    await inicializar_banco()
+
+    #yield em Python é uma palavra-chave que transforma uma função em um gerador, permitindo que ela produza uma sequência de valores sob demanda, 
+    #pausando sua execução e mantendo seu estado para retornar valores um de cada vez, de forma preguiçosa, economizando memória, diferentemente de return que encerra a função. É ideal para trabalhar com grandes conjuntos de dados ou fluxos infinitos, pois os valores são gerados "na hora" e não armazenados todos de uma vez na memória. 
+    yield
+
+    
+    app = FastAPI(
+        title = "Lanchoete do Bairro",
+        summary = "Aplicação de registro de pedidos da loja",
+        lifespan = app_startup
+    )
