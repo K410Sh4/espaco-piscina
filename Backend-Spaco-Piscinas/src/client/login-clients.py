@@ -81,11 +81,11 @@ async def inicializar_banco():
 #primeiramente que o inicializador de banco de dados
 async def get_conn ():
 
-# O aiomysql é uma biblioteca Python utilizada para conectar e interagir com bancos de dados MySQL ou MariaDB de forma assíncrona.
-# utiliza o framework asyncio (PEP-3156) para permitir que as operações de banco de dados não bloqueiem a execução do seu código 
-# Python, tornando-o ideal para aplicações de alto desempenho. 
+    # O aiomysql é uma biblioteca Python utilizada para conectar e interagir com bancos de dados MySQL ou MariaDB de forma assíncrona.
+    # utiliza o framework asyncio (PEP-3156) para permitir que as operações de banco de dados não bloqueiem a execução do seu código 
+    # Python, tornando-o ideal para aplicações de alto desempenho. 
 
-# Ela ultilizará o aiomysql e retorna os valores das variaveis a seguir conforme o que foi colocado dentro das seguintes colunas do sql
+    # Ela ultilizará o aiomysql e retorna os valores das variaveis a seguir conforme o que foi colocado dentro das seguintes colunas do sql
     return await aiomysql.connect(
         host     = os.getenv("SQL_HOST"),
         port     = os.getenv("SQL_PORT"),
@@ -115,7 +115,99 @@ async def app_startup(app: FastAPI):
 
     
     app = FastAPI(
+
+        #Define o título da aplicação. Esse título aparece na documentação automática gerada pelo FastAPI (Swagger UI e Redoc).
         title = "Lanchoete do Bairro",
+
+        #É um resumo curto da aplicação, também exibido na documentação interativa.
         summary = "Aplicação de registro de pedidos da loja",
+
+        #lifespan serve para definir o ciclo de vida da aplicação — ou seja, o que acontece quando ela inicia e quando ela é encerrada.
         lifespan = app_startup
     )
+
+    #Em Python, class é a palavra-chave usada para criar uma classe, que nada mais é do que um "molde" ou "modelo" para construir objetos.
+    
+    #O BaseModel é uma classe fornecida pela biblioteca Pydantic, que o FastAPI usa para validação e definição de dados.
+    # Permite definir atributos com tipos (ex.: str, int, float) e automaticamente valida se os dados recebidos têm o tipo correto.
+    class Pedido(BaseModel):
+        id :       Optional[int] = None
+        nome:      str 
+        produto:   list[str]
+        quantidade:int
+        valor:     float[10,2]
+
+        #aqui se nao for fonecido os valores dos adicionais, por padrao os adicionais serao inexistentes
+        adicionais:Optional[list[str]] = None
+        status:    str = "Pendente"
+    
+    @app.post("/pedidos")
+
+    # a seguinte funcao assincrona relaciona a tabela mysql pedido com a formatacao atribuída a classe Pedido do python
+    async def criar_pedido(pedido: Pedido)
+        
+        conn = await get_conn()
+        cursor = await conn.cursor()
+
+        #foram utilizadas 6 aspas duplas para indicar fechamento e abertura de códigos em múltiplas linhas
+        sql = """
+           ISERT INTO pedidos (nome, produto, quantidade, valor, adicionais, status)
+           VALUES (%s, %s, %s, %s, %s, %s)
+           """
+    
+        # será esperado que o cursor rodará o executador, que por sua vez executará a variavel sql que recebera os atributos a seguir
+    
+        #dump → significa "despejar" (to dump). 
+        #O s no final vem de string.
+        #Então, json.dumps = "despejar em uma string JSON".
+        await cursor.execute(sql(
+          pedido.nome,
+          json.dumps(pedido.produto),
+          pedido.quantidade,
+          pedido.valor,
+          json.dumps(pedido.adicionais),
+          pedido.status
+        ))
+
+        await cursor.execute("SELECT LAST_INSERT_ID()")
+
+        #cursor.fetchone() retorna uma tupla com a linha obtida (ex.: (123,)).
+        pedido_id = (await cursor.fetchone())[0]
+        pedido.id = pedido_id
+        return JSONResponse(
+            status_code = status.HTTP_201_CREATED,
+
+            #jsonable_encoder(pedido) converte o modelo Pydantic (ou objetos complexos 
+            #como datetime, UUID) para tipos JSON-compatíveis (dict, str, int, etc.).
+            content = jsonable_encoder(pedido)
+        )
+        
+    @app.get("/pedidos")
+    async def retornar_pedidos():
+        conn = await get_conn()
+        
+        #DictCursor é um cursor que retorna resultados como dicionários em vez de tuplas, tornando o acesso aos dados mais intuitivo e seguro.
+        cursor = (await cursor.execute(aiomysql.DictCursor))
+        
+        await cursor.execute("SELECT * FROM pedidos")
+
+        #os ressultados passados para a variável resultados após serem retornadas em um dicionário
+        #serao lidos pelo metodo for r in resultados onde ele passará por todos os produto e adicionais existentes
+        resultados = await cursor.fetchall()
+
+        for r in resultados:
+            #se o arquivo json encontrar valor para o produto, ent ele retornará o valor da variável, sen ele nao retornará nada
+            r["produto"] = json.loads(r["produto"]) if r ["produto"] else []
+            #a mesma coisa com o de cima
+            r["adicionais"] = json.loads(r["adicionais"]) if r ["adicionais"] else []
+
+        return JSONResponse(
+            status_code = status.HTTP_200_OK,
+            #aqui os resultados obtidos passam para uma funcao do fastapi em que trasfroma os valores obtidos em python
+            #em valores que sao possiveis serem identificados pelo Json
+            content = jsonable_encoder(resultados)
+        )
+    
+    @app.get("/pedidos/{id}")
+    async def retorna_pedido
+
