@@ -64,58 +64,13 @@
         </ul>
         <div class="search">
           <a>Pesquisar</a>
-          <img src="/images/image-removebg-preview.png">
         </div>
       </div>
+      <div class="products-main">
       <!-- aréa de produtos principal -->
-      <div class="products-area">
-
-        <!-- Esqueleto de produtos -->
-        <div class="product-frame">
-
-          <div class="product-image">
-            <img src="/images/image-removebg-preview (1).png" class="image">
-          </div>
-          <div class="description">
-            <div class="product-name">
-              <a class="name">Clarificante Genco 1 Litro</a>
-            </div>
-            <div class="product-price">
-              <a class="price">$22.00</a>
-            </div>
-          </div>
-        </div>
-        <div class="product-frame">
-
-          <div class="product-image">
-            <img src="/images/image-removebg-preview (1).png" class="image">
-          </div>
-          <div class="description">
-            <div class="product-name">
-              <a class="name">Clarificante Genco 1 Litro</a>
-            </div>
-            <div class="product-price">
-              <a class="price">$22.00</a>
-            </div>
-          </div>
-        </div>
-        <div class="product-frame">
-
-          <div class="product-image">
-            <img src="/images/image-removebg-preview (1).png" class="image">
-          </div>
-          <div class="description">
-            <div class="product-name">
-              <a class="name">Clarificante Genco 1 Litro</a>
-            </div>
-            <div class="product-price">
-              <a class="price">$22.00</a>
-            </div>
-          </div>
-        </div>
-        <!-- Fim do esqueleto -->
-    </div>
-    <!-- fim da area de produtos principal -->
+       <div class = "list-products" id="respListar"></div>
+      <!-- Fim do esqueleto -->
+      </div>
     </div>
     <!-- fim da aba de produtos -->
   </main>
@@ -123,10 +78,66 @@
 
   <!-- rodapé de informacoes -->
   <footer>
+    <div class="products-area">
 
+      <!-- Esqueleto de produtos -->
+      <!-- 1. Criar Pedido -->
+      <section class="c-pedido pedidos">
+        <h2>1. Criar Pedido</h2>
+        <label>Nome:</label><br>
+        <input id="nome"><br><br>
+
+        <label>Produto (separado por vírgulas):</label><br>
+        <input id="produto"><br><br>
+
+        <label>Quantidade:</label><br>
+        <input id="quantidade" type="number"><br><br>
+
+        <label>Valor:</label><br>
+        <input id="valor" type="number" step="0.01"><br><br>
+
+        <label>Adicionais (separado por vírgulas):</label><br>
+        <input id="adicionais"><br><br>
+
+        <button onclick="criarPedido()">Enviar</button>
+
+        <div id="respCriar"></div>
+      </section>
+
+      <!-- 2. Listar todos -->
+      <section class="l-pedidos pedidos">
+        <h2>2. Listar Todos os Pedidos</h2>
+        <button onclick="listarPedidos()">Carregar</button>
+      </section>
+
+      <!-- 3. Buscar por ID -->
+      <section class="f-pedidos pedidos">
+        <h2>3. Buscar Pedido por ID</h2>
+        <input id="buscarId" type="number" placeholder="ID do pedido">
+        <button onclick="buscarPorId()">Buscar</button>
+        <div id="respBuscar"></div>
+      </section>
+
+      <!-- 4. Atualizar Status -->
+      <section class="a=pedidos pedidos">
+        <h2>4. Atualizar Status</h2>
+        <input id="statusId" type="number" placeholder="ID do pedido"><br><br>
+        <input id="novoStatus" placeholder="Novo status"><br><br>
+        <button onclick="atualizarStatus()">Atualizar</button>
+        <div id="respStatus"></div>
+      </section>
+
+      <!-- 5. Apagar Pedido -->
+      <section class="d-pedidos pedidos">
+        <h2>5. Apagar Pedido</h2>
+        <input id="deleteId" type="number" placeholder="ID do pedido">
+        <button onclick="apagarPedido()">Apagar</button>
+        <div id="respDelete"></div>
+      </section>
+    </div>
   </footer>
   <!-- fim do rodape de informacões -->
 </body>
 <!-- Fim do site  -->
-
+<script src="/Javascript/dados.js"></script>
 </html>
