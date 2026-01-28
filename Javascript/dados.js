@@ -6,11 +6,9 @@ function card(titulo, conteudo) {
     <div style="
       border: 1px solid #ccc;
       padding: 5px;
-width: 100%;
-height: auto;
-
-
-wrap-content: center;
+      width: 30%;
+      height: auto;
+      wrap-content: center;
       margin-top: 10px;
       background: #fafafa;
       border-radius: 6px;

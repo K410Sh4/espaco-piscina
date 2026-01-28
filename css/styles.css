@@ -237,7 +237,7 @@ main .wellcome {
     align-content: flex-start;
     height: auto;
     width: auto;
-    border: 1px solid black;
+    margin-top: 3vw;
     background: white;
     color: black;
     overflow-y: scroll;
@@ -253,18 +253,14 @@ main .wellcome {
     color: black;
 }
 
-.products-main{
+.products-main {
     display: flex;
+    align-items: center;
     width: 100%;
     height: auto;
-    break-inside: auto;
-    overflow-wrap: normal;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
     background: white;
 }
+
 main .products .products-line {
     display: flex;
     background: white;
@@ -360,7 +356,8 @@ main .products .products-line .search img {
 .pedidos * {
     font-size: 100%;
 }
-.pedidos label{
+
+.pedidos label {
     width: 1vw;
     height: 1vw;
 }
@@ -379,12 +376,11 @@ main .products .products-line .search img {
     justify-content: center;
     align-content: center;
     background: white;
-    width: 100%;
+    width: 90%;
     height: auto;
-  
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     border-top: 1px solid black;
-   
+
 }
 
 .list-products * {
