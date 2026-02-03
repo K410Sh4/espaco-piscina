@@ -1,7 +1,7 @@
 * {
-    margin: auto;
-    padding: auto;
-    border: px solid black;
+    margin: 0;
+    padding: 0;
+    width: auto;
     font-family: sans-serif;
     color: rgb(255, 255, 255);
     list-style: none;
@@ -34,6 +34,7 @@
         transition: transform 0.3s ease-in;
         background: linear-gradient(to top, rgb(45, 142, 253), cyan, white);
     }
+
     .header .options-header .mobile-menu {
         display: none;
         padding-right: 0px;
@@ -49,10 +50,12 @@ body {
     list-style: none;
     overflow-x: hidden;
     background: linear-gradient(to top, rgb(45, 142, 253), cyan, white);
-    background-repeat: no-repeat;
-    height: 100vh;
-    
+    background-size: cover;
+    height: auto;
+    width: 100%;
+
 }
+
 
 header {
     margin: auto;
@@ -63,12 +66,26 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 0vw;
+    width: 90vw;
     background: linear-gradient(to right, rgb(0, 155, 255), rgb(45, 165, 250));
+}
+
+* {
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
+    justify-items: flex-start;
+}
+
+.header ul {
+    display: flex;
+    padding: 0vw 5vw;
 }
 
 .header .logo {
     display: flex;
     margin-left: 1px;
+    align-items: center;
 }
 
 .header .logo .logo-image img {
@@ -89,8 +106,8 @@ header {
     padding-right: 0px;
     cursor: pointer;
     display: block;
-    
-    
+
+
 }
 
 .header .options-header .mobile-menu div {
@@ -134,9 +151,11 @@ header {
 .header .options-header .mobile-menu.active .Line3 {
     transform: rotate(45deg) translate(-5px, -4px);
 }
+
 .header .options-header .mobile-menu.active .Line4 {
     transform: rotate(90deg) translate(-15px, -16px)
 }
+
 .header .options-header .nav-list li {
     opacity: 0;
 }
@@ -170,96 +189,221 @@ header {
     font-weight: 100;
     text-decoration: none;
 }
-main{
-    padding: 0;
+
+input {
+    width: 90%;
+    margin: 1% 0%;
+}
+
+main {
+    padding: 1vw 0vw;
     margin: 0;
-    border: px solid black;
+    height: auto;
+    width: 100%;
     justify-items: center;
     align-items: center;
+
 }
-main .wellcome{
+
+main .wellcome {
     margin: 0px;
     margin-top: 1rem;
     padding: 10px;
     border: px black solid;
     justify-items: center;
+    margin-bottom: 10vw;
 }
-main .wellcome h1{
-font-family: sans-serif;
 
+.wellcome h1 {
+    color: black;
+    font-size: 3vw;
+    text-align: center;
 }
-main .products {
-    margin-top: 5%;
-}
-main .products .products-line{
-     display: flex;
-     background: white;
-     align-items: center;
-    padding: 10px 1px; 
-    }
 
-main .products .products-line .products-bar{
-    background: white;
-    display: flex;
-    margin-left: 0;
-}
-main  .products .products-line .products-bar .separator{
-    margin: 0px 15px;
-    border:solid 1px black;
-}
-main .products .products-bar .products-option{
-    padding: 0;
+.products {
     margin: 0;
-    color:black;
-    margin: 0px 0%;
-    border:solid px black;
-}
-main .products .products-bar .products-option a{
     padding: 0;
-    margin: 0;
-    color:black;
-    font-size: 110%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
-
-}main .products .products-line .search{
-       border: px solid black;
-       align-content: center;
-       margin: 0px 10%;
-       border: 1px black solid;
-       border-radius: 10px;
-       padding: 10px;
-    }
-main .products .products-line .search a{
-       color: black;
-}
-main .products .products-line .search img{
-       width: 20px;
-       margin-left: 5px;
-}
-main .products .products-area{
-    display: flex;
-    margin: 1% 10%;
-    flex-direction: row;
+    width: 90%;
+    height: auto;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    align-content: center;
+    background: white;
 }
-.product-frame{
-    margin: 0%;
-    border: 2px solid black;
+
+.pedidos {
+    padding: 0.3vw 1vw;
+    align-items: flex-start;
+    align-content: flex-start;
+    height: auto;
+    width: auto;
+    margin-top: 3vw;
+    background: white;
+    color: black;
+    overflow-y: scroll;
+    scroll-padding: 0vw;
+    font-size: 1vw;
+}
+
+.c-pedido {
+    height: auto;
+}
+
+.pedidos * {
+    color: black;
+}
+
+.products-main {
     display: flex;
-    flex-direction: row;
-    padding: 5px;
-    background: rgb(255, 255, 255);
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background: white;
 }
-.image{
+
+main .products .products-line {
+    display: flex;
+    background: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1vw 3vw;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 1vw;
+    box-shadow: 0.1vw 0.1vw 8px rgba(0, 0, 0, 0.404);
+    width: 90%;
+}
+
+main .products .products-line .products-bar {
+    background: white;
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 60%;
+    margin-left: 0;
+}
+
+main .products .products-line .products-bar .separator {
+    margin: 0px 15px;
+    padding: 1vw 0%;
+    border: solid 1px black;
+}
+
+main .products .products-bar .products-option {
+    padding: 0;
+    margin: 0;
+    color: black;
+    margin: 0px 0%;
+    border: solid px black;
+}
+
+main .products .products-bar .products-option a {
+    padding: 0;
+    margin: 0;
+    color: black;
+    font-size: 110%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+
+}
+
+main .products .products-line .search {
+    border: px solid black;
+    align-content: center;
+    margin: 0px 10%;
+    border: 1px black solid;
+    border-radius: 10px;
+    width: 100%;
+    padding: 5px;
+}
+
+main .products .products-line .search a {
+    color: black;
+}
+
+main .products .products-line .search img {
+    width: 20px;
+    margin-left: 5px;
+}
+
+.products-area {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: flex-start;
+    justify-content: space-around;
+    align-content: flex-start;
+    background: white;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.product-frame {
+    border: 2px solid black;
+    width: 100%;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 0.5vw;
+    background: rgb(255, 255, 255);
+    color: black;
+    display: flex;
+}
+
+.pedidos h2 {
+    margin-bottom: 1vw;
+}
+
+.pedidos * {
+    font-size: 100%;
+}
+
+.pedidos label {
+    width: 1vw;
+    height: 1vw;
+}
+
+.c_pedido {
+    width: 100vw;
+}
+
+
+.list-products {
+    margin: auto;
+    margin-bottom: 5vw;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    background: white;
+    width: 90%;
+    height: auto;
+    flex-wrap: wrap;
+    border-top: 1px solid black;
+
+}
+
+.list-products * {
+    color: black;
+}
+
+footer {
+    width: 90vw;
+    margin: auto;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.image {
     justify-content: center;
     border: 1px solid black;
     width: 100%;
     margin-top: 0px;
 }
-.description{
+
+.description {
     border: 1px black solid;
     margin: 0%;
     padding: 0%;
@@ -267,20 +411,23 @@ main .products .products-area{
     align-items: center;
     margin-bottom: 1%;
     margin-top: 0%;
-    
+
 }
-.name{
+
+.name {
     color: black;
     font-size: 80%;
     border: 1px solid black;
-    margin:0%;
-  
+    margin: 0%;
+
 }
-.product-price{
+
+.product-price {
     margin-top: 50%;
 }
-.price{
+
+.price {
     color: black;
     margin-bottom: 50%;
-     border: 1px solid black;
+    border: 1px solid black;
 }
