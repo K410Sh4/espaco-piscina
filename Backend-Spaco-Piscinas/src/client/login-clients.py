@@ -208,6 +208,49 @@ async def app_startup(app: FastAPI):
             content = jsonable_encoder(resultados)
         )
     
+    
     @app.get("/pedidos/{id}")
-    async def retorna_pedido
+    async def retorna_pedido(id: int):
+        conn = await get_conn()
+        cursor = await conn.cursor(aiomysql.DictCursor)
 
+        await cursor.execute("SELECT * FROM pedidos WHERE id = %s", (id))
+        pedido = await cursor.fetchone()
+
+        if not pedido:
+            raise HTTPException(status_code= 404, detail = "Pedido não encontrado")
+        
+        pedido["produto"] = json.loads(pedido["produto"])
+        pedido["adicionais"] = json.loads(pedido["adicionas"])
+        return JSONResponse(
+            status_code = 200,
+            content = jsonable_encoder(pedido)
+        )
+    
+
+    @app.put("/pedidos/{id}")
+    async def atualiza_pedido(id: int, pedido_atualizado: Pedido):
+        conn = await get_conn()
+        cursor = await conn.cursor()
+        await cursor.execute("SELECT id FROM pedidos WHERE id = %s", (id))
+        existe = await cursor.fetchone()
+        if not existe:
+            raise HTTPException(status_code = 404, detail = "Pedido não encontrado")
+        sql = """
+            UPDATE pedidos
+            SET nome = %s,
+            produto = %s,
+            quantidade = %s,
+            valor = %s,
+            adicionais = %s,
+            status = %s,
+            WHERE ID = %s
+"""
+        await cursor.execute(sql, (
+            pedido_atualizado.nome,
+            json.dumps(pedido_atualizado.produto),
+            pedido_atualizado.quantidade,
+            pedido_atualizado.valor,
+            json.dumps(pedido_atualizado.adicionais),
+            
+        ))
